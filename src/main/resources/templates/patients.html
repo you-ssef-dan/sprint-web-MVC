@@ -6,26 +6,35 @@
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
 </head>
 <body>
-<h3>liste des patients</h3>
+<div class="p-3 m-3">
+    <div class="card">
+        <div class="card-header">Liste Patients</div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td>ID</td><td>nom</td><td>prenom</td><td>dateNaissance</td><td>score</td><td>malade</td>
+                </tr>
+                </thead>
 
-<table>
-    <thead>
-    <tr>
-        <td>ID</td><td>nom</td><td>prenom</td><td>dateNaissance</td><td>score</td><td>malade</td>
-    </tr>
-    </thead>
+                <tbody>
+                <tr th:each="p:${listPatients}">
+                    <td th:text="${p.getId()}"></td>
+                    <td th:text="${p.getNom()}"></td>
+                    <td th:text="${p.getPrenom()}"></td>
+                    <td th:text="${p.getDateNaissance()}"></td>
+                    <td th:text="${p.getScore()}"></td>
+                    <td th:text="${p.isMalade()}"></td>
 
-    <tbody>
-    <tr th:each="p:${listPatients}">
-        <td th:text="${p.getId()}"></td>
-        <td th:text="${p.getNom()}"></td>
-        <td th:text="${p.getPrenom()}"></td>
-        <td th:text="${p.getDateNaissance()}"></td>
-        <td th:text="${p.getScore()}"></td>
-        <td th:text="${p.isMalade()}"></td>
-    </tr>
-    </tbody>
+                    <td>
+                        <a onclick="return confirm('est vous sure!')" class="btn btn-danger" th:href="@{/deletePatient(id=${p.getId()})}">Delete</a>
+                    </td>
 
-</table>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>
